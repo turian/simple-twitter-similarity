@@ -4,6 +4,46 @@ twittersimilarity
     by Joseph Turian
 
 USAGE:
+    simple-twitter-similarity.py [options] user1 user2
+
+    Options:
+      -h, --help            show this help message and exit
+      -p PREPROCESSING, --preprocessing=PREPROCESSING
+                            'string.split' or 'pytextpreprocess' [default:
+                            string.split]
+
+METHODOLOGY:
+    * repr(u1) is representation of user u1.
+
+    * We compute and return sim(repr(u1), repr(u2)). A standard choice of sim
+    in information retrieval is the Cosine similarity:
+        http://en.wikipedia.org/wiki/Cosine_distance
+
+    * repr(u) = sum_{tweet t in user u's timeline} repr(t)
+    i.e. we do an unweighted combination of each of the user's tweets
+    to get the user's representation. If tweets were of significantly
+    different length (instead of up to 160 characters per), it might
+    make sense to downweight each tweet's repr by its length, so that
+    longer tweets had the same effect on the user representation as
+    shorter tweets.
+
+    * repr(t)[w] = 0 if w is in the stoplist at the top of
+    simple-twitter-similarity.py, and the word count of w in preprocess(t)
+    otherwise.
+
+    preprocess(t) either does simple tokenization (word splitting),
+    or can use a more sophisticated preprocessing module---like
+    pytextpreocess---with stemming, lowercasing, and more complete
+    stop-word removal.
+
+    A better term-document representation would use the tf-idf score
+    instead of the word count, so that rarer words are more highly
+    weighted. tf-idf is also more common in the IR literature. However,
+    this would require acquiring IDF scores over a large corpus,
+    which I leave as an exercise to the reader. (Hint: Scraping, not
+    computing the scores, is the most programming intensive part.) One
+    could also consider BM25 scores, which are widely considered better
+    than tf*idf scores.
 
 REQUIREMENTS:
     * python-twitter:
