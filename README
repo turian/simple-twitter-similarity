@@ -1,0 +1,38 @@
+twittersimilarity
+-----------------
+
+    by Joseph Turian
+
+USAGE:
+
+REQUIREMENTS:
+    * python-twitter:
+        easy_install python-twitter
+    http://code.google.com/p/python-twitter/
+    (This package, in turn, requires simplejson)
+
+NOTES:
+    * This will only work on public timelines. We don't do authentication.
+
+    * We only use as many twitter updates as GetUserTimeline returns,
+    with count=200. In the future, one might want to keep reading the
+    user's timeline until it is exhausted, the get the ENTIRE timeline.
+
+    * Smoothing is a technique whereby we improve recall. There are
+    several ways we could smooth the data:
+        * By default, we preprocess the tweets solely using
+        string.split. This preprocessing will lead to poor recall,
+        since it does not handle variations in inflection, case, and
+        punctuation. More sophisticated preprocessing could improve
+        recall, and would include lowercasing, stemming, and improved
+        tokenization. If you have package pytextpreprocess installed
+        (http://github.com/turian/pytextpreprocess), you can get
+        sophisticated preprocessing by using program option:
+            --preprocessing=pytextpreprocess
+
+        * Every time we see a twitter username referenced, we could
+        take the representation of that referenced user and mix it in
+        with the representation of the referencing user. In particular,
+        every word uttered by the referenced user could be normalized to
+        a probability distribution. Referncing this user is equivalent
+        to uttering the referenced user's probability distribution.
