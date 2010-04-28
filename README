@@ -51,6 +51,10 @@ REQUIREMENTS:
     http://code.google.com/p/python-twitter/
     (This package, in turn, requires simplejson)
 
+    * pytextpreprocess [optional]:
+        http://github.com/turian/pytextpreprocess
+    For more sophisticated text preprocessing.
+
 NOTES:
     * This will only work on public timelines. We don't do authentication.
 
@@ -65,9 +69,8 @@ NOTES:
         since it does not handle variations in inflection, case, and
         punctuation. More sophisticated preprocessing could improve
         recall, and would include lowercasing, stemming, and improved
-        tokenization. If you have package pytextpreprocess installed
-        (http://github.com/turian/pytextpreprocess), you can get
-        sophisticated preprocessing by using program option:
+        tokenization. If you have package pytextpreprocess installed,
+        you can get sophisticated preprocessing by using program option:
             --preprocessing=pytextpreprocess
 
         * Every time we see a twitter username referenced, we could
